@@ -80,11 +80,12 @@ function Validator (options) {
           const formValues = Array.from(enableInput).reduce(function (values, input) {
             switch (input.type) {
               case 'radio':
-                if (input.matches(':checked')) {
-                  values[input.name] = input.value;
-                } else if (!values[input.name]) {
-                    values[input.name] = '';
-                }
+                values[input.name] = formElement.querySelector('input[name = "' + input.name + '"]');
+                // if (input.matches(':checked')) {
+                //   values[input.name] = input.value;
+                // } else if (!values[input.name]) {
+                //     values[input.name] = '';
+                // }
                 break;
               case 'checkbox':
                 if (input.matches(':checked')) {
@@ -123,7 +124,7 @@ function Validator (options) {
       } else {
         selectorRules[rule.selector] = [rule.test];
       };
-
+      console.log(rule.selector)
       const inputElements = formElement.querySelectorAll(rule.selector);
       Array.from(inputElements).forEach (function (inputElement) {
         if(inputElement) {
@@ -143,6 +144,7 @@ function Validator (options) {
         }
       }) 
     });
+    console.log(formElement)
   };
 };
 
